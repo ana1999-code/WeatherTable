@@ -16,28 +16,30 @@ import java.util.Optional;
 public class WeatherService {
     private final WeatherMapper weatherMapper;
     private final WeatherConfig weatherConfig;
+    private final WeatherAPI weatherAPI;
 
     public WeatherService(WeatherConfig weatherConfig, WeatherMapper weatherMapper) {
         this.weatherConfig = weatherConfig;
         this.weatherMapper = weatherMapper;
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(weatherConfig.getApiUrl())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        this.weatherAPI = retrofit.create(WeatherAPI.class);
     }
 
-    public void getWeather(String city) throws IOException, WeatherException {
-        Retrofit retrofit =
-                new Retrofit.Builder()
-                        .baseUrl(weatherConfig.getApiUrl())
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-        WeatherAPI weatherAPI = retrofit.create(WeatherAPI.class);
-
+    public WeatherForecast getNextDayWeather(String city) throws IOException, WeatherException {
         Call<WeatherResponse> call = weatherAPI.weather(weatherConfig.getApiKey(),
                 city, DateUtil.nextDay());
 
         Optional<WeatherResponse> weatherResponse = Optional.ofNullable(call.execute().body());
-        WeatherForecast weatherForecast = weatherMapper
-                .fromWeatherResponseToWeatherForecast(weatherResponse.orElseThrow(() -> new WeatherException("Weather exception")));
-        System.out.println(weatherForecast);
+
+        return weatherMapper
+                .fromWeatherResponseToWeatherForecast(
+                        weatherResponse.orElseThrow(() -> new WeatherException("Weather exception"))
+                );
     }
 }
 
