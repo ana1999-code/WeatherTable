@@ -55,4 +55,16 @@ public class WeatherForecast {
     public void setWindDirection(Double windDirection) {
         this.windDirection = windDirection;
     }
+
+    @Override
+    public String toString() {
+        return "WeatherForecast{" +
+                "cityName='" + cityName + '\'' +
+                ", minTemp=" + minTemp +
+                ", maxTemp=" + maxTemp +
+                ", humidity=" + humidity +
+                ", windSpeed=" + windSpeed +
+                ", windDirection=" + windDirection +
+                '}';
+    }
 }
