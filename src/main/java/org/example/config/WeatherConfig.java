@@ -17,6 +17,10 @@ public class WeatherConfig {
     }
 
     public String getApiKey() {
+        String envApiKey = System.getenv("API_KEY");
+        if (envApiKey != null) {
+            return envApiKey;
+        }
         return apiKey;
     }
 
