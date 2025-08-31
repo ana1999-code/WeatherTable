@@ -32,9 +32,14 @@ public class WeatherResponse {
 
     public static class ForecastDay {
         private Day day;
+        private List<Hour> hour;
 
         public Day getDay() {
             return day;
+        }
+
+        public List<Hour> getHour() {
+            return hour;
         }
     }
 
@@ -58,6 +63,14 @@ public class WeatherResponse {
 
         public Double getMaxwind_kph() {
             return maxwind_kph;
+        }
+    }
+
+    public static class Hour {
+        private String wind_dir;
+
+        public String getWind_dir() {
+            return wind_dir;
         }
     }
 }
