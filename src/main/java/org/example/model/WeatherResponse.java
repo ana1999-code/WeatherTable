@@ -1,5 +1,6 @@
 package org.example.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeatherResponse {
@@ -14,16 +15,28 @@ public class WeatherResponse {
         return forecast;
     }
 
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setForecast(Forecast forecast) {
+        this.forecast = forecast;
+    }
+
     public static class Location {
         private String name;
 
         public String getName() {
             return name;
         }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 
     public static class Forecast {
-        private List<ForecastDay> forecastday;
+        private final List<ForecastDay> forecastday = new ArrayList<>();
 
         public List<ForecastDay> getForecastday() {
             return forecastday;
@@ -32,7 +45,7 @@ public class WeatherResponse {
 
     public static class ForecastDay {
         private Day day;
-        private List<Hour> hour;
+        private final List<Hour> hour = new ArrayList<>();
 
         public Day getDay() {
             return day;
@@ -40,6 +53,10 @@ public class WeatherResponse {
 
         public List<Hour> getHour() {
             return hour;
+        }
+
+        public void setDay(Day day) {
+            this.day = day;
         }
     }
 
@@ -64,6 +81,22 @@ public class WeatherResponse {
         public Double getMaxwind_kph() {
             return maxwind_kph;
         }
+
+        public void setMaxtemp_c(Double maxtemp_c) {
+            this.maxtemp_c = maxtemp_c;
+        }
+
+        public void setMintemp_c(Double mintemp_c) {
+            this.mintemp_c = mintemp_c;
+        }
+
+        public void setAvghumidity(Double avghumidity) {
+            this.avghumidity = avghumidity;
+        }
+
+        public void setMaxwind_kph(Double maxwind_kph) {
+            this.maxwind_kph = maxwind_kph;
+        }
     }
 
     public static class Hour {
@@ -71,6 +104,10 @@ public class WeatherResponse {
 
         public String getWind_dir() {
             return wind_dir;
+        }
+
+        public void setWind_dir(String wind_dir) {
+            this.wind_dir = wind_dir;
         }
     }
 }

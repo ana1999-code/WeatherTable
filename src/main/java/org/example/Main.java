@@ -16,9 +16,11 @@ import java.util.Map;
 
 public class Main {
 
+    private final static String FILE_PROPS = "src/main/resources/application.properties";
+
     public static void main(String[] args) throws IOException, WeatherException {
         WeatherMapper weatherMapper = new WeatherMapper();
-        WeatherConfig weatherConfig = new WeatherConfig();
+        WeatherConfig weatherConfig = new WeatherConfig(FILE_PROPS);
         WeatherService weatherService = new WeatherService(weatherConfig, weatherMapper);
 
         List<String> cities = List.of("Chisinau", "Madrid", "Kyiv", "Amsterdam");

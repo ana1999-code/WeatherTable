@@ -18,10 +18,15 @@ public class WeatherService {
     private final WeatherConfig weatherConfig;
     private final WeatherAPI weatherAPI;
 
+    public WeatherService(WeatherConfig weatherConfig, WeatherMapper weatherMapper, WeatherAPI weatherAPI) {
+        this.weatherConfig = weatherConfig;
+        this.weatherMapper = weatherMapper;
+        this.weatherAPI = weatherAPI;
+    }
+
     public WeatherService(WeatherConfig weatherConfig, WeatherMapper weatherMapper) {
         this.weatherConfig = weatherConfig;
         this.weatherMapper = weatherMapper;
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(weatherConfig.getApiUrl())
                 .addConverterFactory(GsonConverterFactory.create())

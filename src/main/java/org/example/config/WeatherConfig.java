@@ -8,9 +8,9 @@ public class WeatherConfig {
     private String apiKey;
     private String apiUrl;
 
-    public WeatherConfig() throws IOException {
+    public WeatherConfig(String fileProps) throws IOException {
         Properties props = new Properties();
-        props.load(new FileInputStream("src/main/resources/application.properties"));
+        props.load(new FileInputStream(fileProps));
 
         this.apiKey = props.getProperty("weather.api.key");
         this.apiUrl = props.getProperty("weather.api.url");

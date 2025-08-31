@@ -22,7 +22,7 @@ public class WeatherMapper {
         Set<String> windDirections = new HashSet<>();
         hours.forEach(hour -> windDirections.add(hour.getWind_dir()));
         weatherForecast.setWindDirection(String.join(", ", windDirections));
-        
+
         return weatherForecast;
     }
 }

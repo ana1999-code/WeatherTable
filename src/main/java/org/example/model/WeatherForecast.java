@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.Objects;
+
 public class WeatherForecast {
     private String cityName;
     private Double minTemp;
@@ -54,5 +56,22 @@ public class WeatherForecast {
 
     public void setWindDirection(String windDirection) {
         this.windDirection = windDirection;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        WeatherForecast that = (WeatherForecast) o;
+        return Objects.equals(cityName, that.cityName)
+                && Objects.equals(minTemp, that.minTemp)
+                && Objects.equals(maxTemp, that.maxTemp)
+                && Objects.equals(humidity, that.humidity)
+                && Objects.equals(windSpeed, that.windSpeed)
+                && Objects.equals(windDirection, that.windDirection);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cityName, minTemp, maxTemp, humidity, windSpeed, windDirection);
     }
 }
