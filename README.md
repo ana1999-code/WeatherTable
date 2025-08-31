@@ -24,7 +24,3 @@ To run the app, you need an **API key**.
 1. Sign up at [WeatherAPI.com](https://www.weatherapi.com/).  
 2. Copy your API key.  
 3. Set it as an environment variable named `API_KEY`.
-
----
-## Run the application
-1. 
