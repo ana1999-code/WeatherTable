@@ -36,14 +36,20 @@ public class WeatherService {
     }
 
     public WeatherForecast getNextDayWeather(String city) throws IOException, WeatherException {
-        Call<WeatherResponse> call = weatherAPI.weather(weatherConfig.getApiKey(),
+        String apiKey = weatherConfig.getApiKey();
+
+        if(apiKey.equals("default_key")){
+            throw new WeatherException("Api key not valid");
+        }
+
+        Call<WeatherResponse> call = weatherAPI.weather(apiKey,
                 city, DateUtil.nextDay());
 
         Optional<WeatherResponse> weatherResponse = Optional.ofNullable(call.execute().body());
 
         return weatherMapper
                 .fromWeatherResponseToWeatherForecast(
-                        weatherResponse.orElseThrow(() -> new WeatherException("Weather exception"))
+                        weatherResponse.orElseThrow(() -> new WeatherException("Invalid weather"))
                 );
     }
 }

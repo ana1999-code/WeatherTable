@@ -35,7 +35,8 @@ class WeatherServiceTest {
     @Test
     public void TestGetNextDayWeather() throws IOException, WeatherException {
         WeatherForecast expectedNextDayWeather = getWeatherForecast();
-
+        
+        when(weatherConfig.getApiKey()).thenReturn("test_key");
         when(weatherAPI.weather(any(), anyString(), anyString()))
                 .thenReturn(RESPONSE_CALL);
         when(weatherMapper.fromWeatherResponseToWeatherForecast(any(WeatherResponse.class)))
@@ -47,10 +48,19 @@ class WeatherServiceTest {
 
     @Test
     public void TestGetNextDayWeatherWhenThrow() throws IOException, WeatherException {
+        when(weatherConfig.getApiKey()).thenReturn("test_key");
         when(weatherAPI.weather(any(), anyString(), anyString()))
                 .thenReturn(NULL_RESPONSE_CALL);
 
         Assertions.assertThrows(WeatherException.class, () -> weatherService.getNextDayWeather(CITY_NAME)
-                , "Weather exception");
+                , "Invalid weather");
+    }
+
+    @Test
+    public void TestGetNextDayWeatherWhenThrowInvalidKey() throws IOException, WeatherException {
+        when(weatherConfig.getApiKey()).thenReturn("default_key");
+
+        Assertions.assertThrows(WeatherException.class, () -> weatherService.getNextDayWeather(CITY_NAME)
+                , "Api key not valid");
     }
 }
