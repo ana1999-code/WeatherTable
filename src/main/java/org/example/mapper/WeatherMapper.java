@@ -12,6 +12,7 @@ public class WeatherMapper {
         weatherForecast.setMaxTemp(day.getMaxtemp_c());
         weatherForecast.setHumidity(day.getAvghumidity());
         weatherForecast.setWindSpeed(day.getMaxwind_kph());
+        weatherForecast.setWindDirection("ssv");
         return weatherForecast;
     }
 }

@@ -6,7 +6,7 @@ public class WeatherForecast {
     private Double maxTemp;
     private Double humidity;
     private Double windSpeed;
-    private Double windDirection;
+    private String windDirection;
 
     public String getCityName() {
         return cityName;
@@ -48,23 +48,11 @@ public class WeatherForecast {
         this.windSpeed = windSpeed;
     }
 
-    public Double getWindDirection() {
+    public String getWindDirection() {
         return windDirection;
     }
 
-    public void setWindDirection(Double windDirection) {
+    public void setWindDirection(String windDirection) {
         this.windDirection = windDirection;
-    }
-
-    @Override
-    public String toString() {
-        return "WeatherForecast{" +
-                "cityName='" + cityName + '\'' +
-                ", minTemp=" + minTemp +
-                ", maxTemp=" + maxTemp +
-                ", humidity=" + humidity +
-                ", windSpeed=" + windSpeed +
-                ", windDirection=" + windDirection +
-                '}';
     }
 }
